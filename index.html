@@ -1,0 +1,1086 @@
+<html><head><base href="https://policonomia.app/"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Reflexão Coletiva - Plataforma de Discussão Política e Econômica</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+    :root {
+      --primary-color: #4a0e4e;
+      --secondary-color: #89d2dc;
+      --tertiary-color: #f0c987;
+      --background-color: #f7f7f7;
+      --text-color: #333333;
+      --sidebar-width: 240px;
+    }
+    
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-color);
+    }
+    
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+    
+    .sidebar {
+      width: var(--sidebar-width);
+      background-color: var(--primary-color);
+      color: white;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .sidebar .settings-button {
+      background-color: var(--tertiary-color);
+      border: none;
+      color: var(--primary-color);
+      padding: 10px;
+      text-align: center;
+      text-decoration: none;
+      display: block;
+      font-size: 14px;
+      margin: 10px 0;
+      cursor: pointer;
+      border-radius: 4px;
+      width: 100%;
+    }
+    
+    .sidebar .settings-button:hover {
+      background-color: var(--secondary-color);
+    }
+    
+    .main-content {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    
+    .user-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+    
+    .forum-content {
+      flex-grow: 1;
+    }
+    
+    .create-forum {
+      background-color: var(--tertiary-color);
+      border: none;
+      color: var(--primary-color);
+      padding: 10px;
+      text-align: center;
+      text-decoration: none;
+      display: block;
+      font-size: 14px;
+      margin: 10px 0;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    
+    .chat-container {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      background-color: var(--background-color);
+    }
+    
+    .chat-messages {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 20px;
+    }
+    
+    .message-input {
+      display: flex;
+      padding: 10px;
+      background-color: var(--secondary-color);
+    }
+    
+    .message-input input {
+      flex-grow: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 20px;
+      background-color: white;
+    }
+    
+    .message-input button {
+      background-color: transparent;
+      border: none;
+      color: var(--primary-color);
+      cursor: pointer;
+      font-size: 20px;
+      padding: 0 10px;
+    }
+    
+    .settings-button {
+      background-color: transparent;
+      border: none;
+      color: var(--primary-color);
+      cursor: pointer;
+      font-size: 20px;
+      padding: 5px;
+      margin-top: 10px;
+    }
+    
+    .settings-button:hover {
+      color: var(--tertiary-color);
+    }
+    
+    .settings-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--background-color);
+      z-index: 1000;
+      overflow-y: auto;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    
+    .back-button {
+      background-color: transparent;
+      border: none;
+      color: var(--primary-color);
+      font-size: 24px;
+      cursor: pointer;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+    
+    .back-button:hover {
+      color: var(--tertiary-color);
+    }
+    
+    #currentUserInfo {
+      margin-bottom: 20px;
+    }
+    
+    #accountSettingsForm label {
+      display: block;
+      margin-top: 10px;
+    }
+    
+    #accountSettingsForm input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    #accountSettingsForm button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    #accountSettingsForm button:hover {
+      background-color: var(--tertiary-color);
+    }
+    
+    .login-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: var(--background-color);
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    
+    .login-page h1 {
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+    
+    .login-page h2 {
+      margin-top: 0;
+    }
+    
+    .login-page form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 300px;
+      margin-bottom: 20px;
+    }
+    
+    .login-page input, .login-page button {
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    .login-page button {
+      background-color: var(--primary-color);
+      color: white;
+      cursor: pointer;
+    }
+    
+    .search-container {
+      margin-bottom: 20px;
+    }
+    
+    .search-container input {
+      width: calc(100% - 100px);
+      padding: 10px;
+      margin-right: 10px;
+    }
+    
+    .search-container button {
+      padding: 10px 20px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .search-result {
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    .search-result button {
+      padding: 5px 10px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .profile-picture-upload {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .profile-picture-upload img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+    
+    .profile-picture-upload button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    
+    .profile-picture-upload button:hover {
+      background-color: var(--tertiary-color);
+    }
+    
+    .forum-stats {
+      display: flex;
+      justify-content: space-between;
+      background-color: var(--secondary-color);
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    
+    .forum-stats span {
+      display: flex;
+      align-items: center;
+    }
+    
+    .forum-stats i {
+      margin-right: 5px;
+    }
+    
+    .forum-stats .fa-circle {
+      color: #4CAF50;
+    }
+    
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
+    }
+    
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 500px;
+    }
+    
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    
+    .login-link {
+      margin-top: 10px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    .login-link a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: bold;
+    }
+    
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+    
+    .forum-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    .forum-button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      background-color: var(--secondary-color);
+      color: var(--primary-color);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: left;
+      transition: background-color 0.3s ease;
+    }
+    
+    .forum-button:hover {
+      background-color: var(--tertiary-color);
+    }
+    
+    .forum-button-name {
+      font-weight: bold;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+    
+    .forum-button-topic {
+      font-size: 14px;
+      color: #666;
+    }
+    
+    .video-conference {
+      padding: 10px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    
+    .video-conference:hover {
+      background-color: var(--tertiary-color);
+    }
+    
+    #peerList {
+      margin-top: 20px;
+    }
+    
+    #peerList ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    #peerList input, #peerList button {
+      margin-top: 10px;
+    }
+    </style>
+    <script src="https://unpkg.com/jitsi-meet-lib"></script>
+    <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+    </head>
+    <body>
+    <div id="loginPage" class="login-page">
+      <h1>Reflexão Coletiva</h1>
+      <h2>Cadastro</h2>
+      <form id="loginForm">
+        <input type="email" id="loginEmail" placeholder="E-mail" required>
+        <input type="password" id="loginPassword" placeholder="Senha" required>
+        <input type="password" id="confirmPassword" placeholder="Confirme a senha" required>
+        <button type="submit">Cadastrar</button>
+      </form>
+      <p class="login-link">Já tem cadastro? <a href="#" onclick="switchToLogin()">Faça login</a></p>
+    </div>
+    <div id="loginScreen" class="login-page" style="display: none;">
+      <h1>Reflexão Coletiva</h1>
+      <h2>Login</h2>
+      <form id="loginScreenForm">
+        <input type="email" id="loginScreenEmail" placeholder="E-mail" required>
+        <input type="password" id="loginScreenPassword" placeholder="Senha" required>
+        <button type="submit">Entrar</button>
+      </form>
+      <p class="login-link">Não tem uma conta? <a href="#" onclick="switchToRegistration()">Cadastre-se</a></p>
+    </div>
+    <div class="container" style="display: none;">
+      <div class="sidebar">
+        <h1>Reflexão Coletiva</h1>
+        <button class="create-forum" onclick="openModal()"><i class="fas fa-plus"></i> Criar Fórum</button>
+        <button id="searchForumButton" class="settings-button" onclick="openSearchModal()">
+          <i class="fas fa-search"></i> Pesquisar Fóruns
+        </button>
+        <button id="settingsButton" class="settings-button" onclick="openSettingsModal()">
+          <i class="fas fa-cog"></i> Configurações
+        </button>
+        <button id="logoutButton" class="settings-button" onclick="logout()">
+          <i class="fas fa-sign-out-alt"></i> Sair
+        </button>
+        <h2>Fóruns</h2>
+        <ul class="forum-list" id="forumList">
+          <!-- Fóruns serão adicionados dinamicamente aqui -->
+        </ul>
+        <div id="peerInfo"></div>
+        <div id="peerList">
+          <h3>Connected Peers</h3>
+          <ul id="connectedPeers"></ul>
+          <input type="text" id="peerIdInput" placeholder="Enter Peer ID">
+          <button onclick="connectToPeer(document.getElementById('peerIdInput').value)">Connect</button>
+        </div>
+      </div>
+      <div class="main-content" id="mainContent">
+        <div class="user-info">
+          <img src="https://example.com/default-avatar.png" alt="User Avatar" class="user-avatar">
+          <h3 id="currentUserName">Nome de Exibição</h3>
+        </div>
+        <div class="forum-content" id="forumContent">
+          <h2>Bem-vindo ao Reflexão Coletiva</h2>
+          <p>Selecione um fórum para participar ou crie um novo para iniciar uma discussão sobre política ou economia.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div id="createForumModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Criar Novo Fórum</h2>
+        <form id="createForumForm">
+          <label for="forumName">Nome do Fórum:</label><br>
+          <input type="text" id="forumName" name="forumName" required><br>
+          <label for="forumTopic">Tópico:</label><br>
+          <select id="forumTopic" name="forumTopic" required>
+            <option value="politica">Política</option>
+            <option value="economia">Economia</option>
+          </select><br>
+          <label for="forumDescription">Descrição:</label><br>
+          <textarea id="forumDescription" name="forumDescription" required></textarea><br>
+          <button type="submit">Criar Fórum</button>
+        </form>
+      </div>
+    </div>
+    
+    <div id="settingsModal" class="modal">
+      <div class="modal-content settings-screen">
+        <button class="back-button" onclick="closeSettingsModal()"><i class="fas fa-arrow-left"></i></button>
+        <h2>Configurações da Conta</h2>
+        <div id="currentUserInfo"></div>
+        <form id="accountSettingsForm">
+          <div class="profile-picture-upload">
+            <img id="profilePicturePreview" src="https://example.com/default-avatar.png" alt="Profile Picture">
+            <input type="file" id="profilePictureInput" accept="image/*" style="display: none;">
+            <button type="button" onclick="document.getElementById('profilePictureInput').click()">Alterar Foto de Perfil</button>
+          </div>
+          <label for="fullName">Nome Completo:</label><br>
+          <input type="text" id="fullName" name="fullName" required><br>
+          <label for="displayName">Nome de Exibição:</label><br>
+          <input type="text" id="displayName" name="displayName" required><br>
+          <label for="email">E-mail:</label><br>
+          <input type="email" id="email" name="email" required><br>
+          <label for="password">Nova Senha:</label><br>
+          <input type="password" id="password" name="password"><br>
+          <label for="confirmNewPassword">Confirmar Nova Senha:</label><br>
+          <input type="password" id="confirmNewPassword" name="confirmNewPassword"><br>
+          <button type="submit">Salvar Alterações</button>
+        </form>
+      </div>
+    </div>
+    
+    <div id="searchForumModal" class="modal">
+      <div class="modal-content settings-screen">
+        <button class="back-button" onclick="closeSearchModal()"><i class="fas fa-arrow-left"></i></button>
+        <h2>Pesquisar Fóruns</h2>
+        <div class="search-container">
+          <input type="text" id="forumSearchInput" placeholder="Digite para pesquisar fóruns...">
+          <button onclick="searchForums()">Pesquisar</button>
+        </div>
+        <div id="searchResults"></div>
+      </div>
+    </div>
+    
+    <div id="additionalInfoModal" class="modal">
+      <div class="modal-content">
+        <h2>Complete seu perfil</h2>
+        <form id="additionalInfoForm">
+          <label for="firstName">Nome:</label>
+          <input type="text" id="firstName" name="firstName" required>
+          
+          <label for="displayName">Nome de Exibição:</label>
+          <input type="text" id="displayName" name="displayName" required>
+          
+          <div class="profile-picture-upload">
+            <img id="profilePicturePreview" src="https://example.com/default-avatar.png" alt="Foto de Perfil">
+            <input type="file" id="profilePictureInput" accept="image/*" style="display: none;">
+            <button type="button" onclick="document.getElementById('profilePictureInput').click()">Adicionar Foto de Perfil</button>
+          </div>
+          
+          <button type="submit">Salvar e Continuar</button>
+        </form>
+      </div>
+    </div>
+    
+    <div id="emojiPicker" class="picker-modal">
+      <div class="picker-content" id="emojiPickerContent"></div>
+    </div>
+    
+    <div id="stickerPicker" class="picker-modal">
+      <div class="picker-content" id="stickerPickerContent"></div>
+    </div>
+    
+    <div id="gifPicker" class="picker-modal">
+      <div class="picker-content" id="gifPickerContent"></div>
+    </div>
+    
+    <script>
+    let forums = [];
+    let currentForumIndex = -1;
+    let currentUser = {
+      fullName: '',
+      displayName: '',
+      email: 'email@example.com',
+      avatar: 'https://example.com/default-avatar.png',
+      profilePicture: 'https://example.com/default-avatar.png',
+      firstName: ''
+    };
+    
+    let isLoggedIn = false;
+    let peer;
+    let connections = [];
+    let peerId;
+    
+    function initPeer() {
+      peer = new Peer();
+      
+      peer.on('open', function(id) {
+        peerId = id;
+        console.log('My peer ID is: ' + id);
+      });
+    
+      peer.on('connection', function(conn) {
+        connectionHandler(conn);
+      });
+    }
+    
+    function connectionHandler(conn) {
+      conn.on('data', function(data) {
+        receiveData(data);
+      });
+      
+      connections.push(conn);
+    }
+    
+    function connectToPeer(peerId) {
+      const conn = peer.connect(peerId);
+      conn.on('open', function() {
+        connectionHandler(conn);
+      });
+    }
+    
+    function broadcastData(data) {
+      connections.forEach(conn => {
+        conn.send(data);
+      });
+    }
+    
+    function receiveData(data) {
+      if (data.type === 'forum') {
+        forums.push(data.forum);
+        updateForumList();
+      } else if (data.type === 'message') {
+        forums[data.forumIndex].messages.push(data.message);
+        updateChatMessages();
+      }
+    }
+    
+    function createForum(name, topic, description) {
+      const forum = { 
+        name, 
+        topic, 
+        description, 
+        messages: [],
+        participants: 1, 
+        onlineUsers: 1
+      };
+      forums.push(forum);
+      updateForumList();
+      broadcastData({type: 'forum', forum: forum});
+      return forums.length - 1; 
+    }
+    
+    function sendMessage() {
+      const messageInput = document.getElementById('messageInput');
+      const message = messageInput.value.trim();
+      if (message) {
+        const newMessage = { text: message, type: 'text' };
+        forums[currentForumIndex].messages.push(newMessage);
+        messageInput.value = '';
+        updateChatMessages();
+        broadcastData({type: 'message', forumIndex: currentForumIndex, message: newMessage});
+      }
+    }
+    
+    function login(email, password, confirmPassword = null) {
+      if (confirmPassword !== null) {
+        if (password !== confirmPassword) {
+          alert('As senhas não coincidem. Por favor, tente novamente.');
+          return;
+        }
+    
+        if (registerNewUser(email, password)) {
+          isLoggedIn = true;
+          currentUser.email = email;
+          showAdditionalInfoModal();
+        } else {
+          alert('Erro ao criar nova conta. Tente novamente.');
+        }
+      } else {
+        if (validateCredentials(email, password)) {
+          isLoggedIn = true;
+          currentUser.email = email;
+          showMainContent();
+          updateUserInfo();
+          initPeer();
+        } else {
+          alert('E-mail ou senha incorretos. Tente novamente.');
+        }
+      }
+    }
+    
+    function showMainContent() {
+      document.getElementById('loginPage').style.display = 'none';
+      document.getElementById('loginScreen').style.display = 'none';
+      document.querySelector('.container').style.display = 'flex';
+      displayPeers();
+    }
+    
+    function displayPeers() {
+      const peerList = document.createElement('div');
+      peerList.id = 'peerList';
+      peerList.innerHTML = `
+        <h3>Connected Peers</h3>
+        <ul id="connectedPeers"></ul>
+        <input type="text" id="peerIdInput" placeholder="Enter Peer ID">
+        <button onclick="connectToPeer(document.getElementById('peerIdInput').value)">Connect</button>
+      `;
+      document.querySelector('.sidebar').appendChild(peerList);
+    }
+    
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      login(email, password, confirmPassword);
+    });
+    
+    document.getElementById('loginScreenForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginScreenEmail').value;
+      const password = document.getElementById('loginScreenPassword').value;
+      login(email, password);
+    });
+    
+    function openModal() {
+      document.getElementById('createForumModal').style.display = 'block';
+    }
+    
+    function closeModal() {
+      document.getElementById('createForumModal').style.display = 'none';
+    }
+    
+    function openSearchModal() {
+      document.getElementById('searchForumModal').style.display = 'block';
+    }
+    
+    function closeSearchModal() {
+      document.getElementById('searchForumModal').style.display = 'none';
+    }
+    
+    function searchForums() {
+      const searchTerm = document.getElementById('forumSearchInput').value.toLowerCase();
+      const searchResults = forums.filter(forum => 
+        forum.name.toLowerCase().includes(searchTerm) || 
+        forum.description.toLowerCase().includes(searchTerm)
+      );
+      
+      const searchResultsContainer = document.getElementById('searchResults');
+      searchResultsContainer.innerHTML = '';
+      
+      if (searchResults.length === 0) {
+        searchResultsContainer.innerHTML = '<p>Nenhum fórum encontrado.</p>';
+      } else {
+        searchResults.forEach((forum, index) => {
+          const forumElement = document.createElement('div');
+          forumElement.classList.add('search-result');
+          forumElement.innerHTML = `
+            <h3>${forum.name}</h3>
+            <p>${forum.description}</p>
+            <button onclick="joinForum(${index})">Entrar</button>
+          `;
+          searchResultsContainer.appendChild(forumElement);
+        });
+      }
+    }
+    
+    function joinForum(index) {
+      showForumDetails(index);
+      closeSearchModal();
+    }
+    
+    function openSettingsModal() {
+      document.getElementById('settingsModal').style.display = 'block';
+      updateSettingsModal();
+    }
+    
+    function closeSettingsModal() {
+      document.getElementById('settingsModal').style.display = 'none';
+    }
+    
+    function showAdditionalInfoModal() {
+      document.getElementById('additionalInfoModal').style.display = 'block';
+    }
+    
+    document.getElementById('additionalInfoForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      currentUser.firstName = document.getElementById('firstName').value;
+      currentUser.displayName = document.getElementById('displayName').value;
+      currentUser.profilePicture = document.getElementById('profilePicturePreview').src;
+      
+      document.getElementById('additionalInfoModal').style.display = 'none';
+      showMainContent();
+      updateUserInfo();
+    });
+    
+    document.getElementById('createForumForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('forumName').value;
+      const topic = document.getElementById('forumTopic').value;
+      const description = document.getElementById('forumDescription').value;
+      
+      createForum(name, topic, description);
+      closeModal();
+      showForumDetails(forums.length - 1); 
+    });
+    
+    function updateForumList() {
+      const forumList = document.getElementById('forumList');
+      forumList.innerHTML = '';
+      forums.forEach((forum, index) => {
+        const button = document.createElement('button');
+        button.classList.add('forum-button');
+        button.onclick = () => showForumDetails(index);
+        
+        const nameSpan = document.createElement('span');
+        nameSpan.classList.add('forum-button-name');
+        nameSpan.textContent = forum.name;
+        
+        const topicSpan = document.createElement('span');
+        topicSpan.classList.add('forum-button-topic');
+        topicSpan.textContent = forum.topic;
+        
+        button.appendChild(nameSpan);
+        button.appendChild(document.createElement('br'));
+        button.appendChild(topicSpan);
+        
+        forumList.appendChild(button);
+      });
+    }
+    
+    function updateSettingsModal() {
+      const currentUserInfo = document.getElementById('currentUserInfo');
+      currentUserInfo.innerHTML = `
+        <p><strong>Nome Completo:</strong> ${currentUser.fullName}</p>
+        <p><strong>Nome de Exibição:</strong> ${currentUser.displayName}</p>
+        <p><strong>E-mail:</strong> ${currentUser.email}</p>
+      `;
+      
+      document.getElementById('fullName').value = currentUser.fullName;
+      document.getElementById('displayName').value = currentUser.displayName;
+      document.getElementById('email').value = currentUser.email;
+      document.getElementById('profilePicturePreview').src = currentUser.profilePicture;
+    }
+    
+    document.getElementById('profilePictureInput').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('profilePicturePreview').src = e.target.result;
+          currentUser.profilePicture = e.target.result;
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+    
+    document.getElementById('accountSettingsForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const fullName = document.getElementById('fullName').value;
+      const displayName = document.getElementById('displayName').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const confirmNewPassword = document.getElementById('confirmNewPassword').value;
+      
+      if (password !== confirmNewPassword) {
+        alert('As novas senhas não coincidem. Por favor, tente novamente.');
+        return;
+      }
+      
+      currentUser.fullName = fullName;
+      currentUser.displayName = displayName;
+      currentUser.email = email;
+      
+      console.log('Account settings updated:', { fullName, displayName, email, password, profilePicture: currentUser.profilePicture });
+      updateUserInfo();
+      closeSettingsModal();
+    });
+    
+    function updateUserInfo() {
+      if (isLoggedIn) {
+        const userInfo = document.querySelector('.user-info');
+        userInfo.innerHTML = `
+          <img src="${currentUser.profilePicture}" alt="User Avatar" class="user-avatar">
+          <h3 id="currentUserName">${currentUser.displayName}</h3>
+        `;
+        document.getElementById('currentUserName').textContent = currentUser.displayName;
+      }
+    }
+    
+    function logout() {
+      isLoggedIn = false;
+      currentUser = {
+        fullName: '',
+        displayName: '',
+        email: '',
+        avatar: 'https://example.com/default-avatar.png',
+        profilePicture: 'https://example.com/default-avatar.png',
+        firstName: ''
+      };
+      showLoginPage();
+    }
+    
+    function showForumDetails(index) {
+      currentForumIndex = index;
+      const forum = forums[index];
+      const forumContent = document.getElementById('forumContent');
+      forumContent.innerHTML = `
+        <h2>${forum.name}</h2>
+        <p><strong>Tópico:</strong> ${forum.topic}</p>
+        <p><strong>Descrição:</strong> ${forum.description}</p>
+        <div class="forum-stats">
+          <span><i class="fas fa-users"></i> ${forum.participants} participantes</span>
+          <span><i class="fas fa-circle"></i> ${forum.onlineUsers} online</span>
+        </div>
+        <button class="video-conference" onclick="startVideoConference(${index})"><i class="fas fa-video"></i> Iniciar Videoconferência</button>
+        <div class="chat-container">
+          <div class="chat-messages" id="chatMessages"></div>
+          <div class="message-input">
+            <input type="text" id="messageInput" placeholder="Digite sua mensagem...">
+            <button onclick="sendMessage()">Enviar</button>
+            <button class="emoji-picker" onclick="togglePicker('emoji')"><i class="far fa-smile"></i></button>
+            <button class="sticker-picker" onclick="togglePicker('sticker')"><i class="far fa-sticky-note"></i></button>
+            <button class="gif-picker" onclick="togglePicker('gif')"><i class="fas fa-film"></i></button>
+          </div>
+        </div>
+      `;
+      updateChatMessages();
+      
+      document.getElementById('messageInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault(); 
+          sendMessage();
+        }
+      });
+    }
+    
+    function startVideoConference(forumIndex) {
+      const forum = forums[forumIndex];
+      const domain = 'meet.jit.si';
+      const options = {
+        roomName: `Reflexão_Coletiva_${forum.name.replace(/\s+/g, '_')}_${Math.random().toString(36).substring(7)}`,
+        width: 700,
+        height: 500,
+        parentNode: document.querySelector('#mainContent'),
+        interfaceConfigOverwrite: {
+          TOOLBAR_BUTTONS: [
+            'microphone', 'camera', 'closedcaptions', 'desktop', 'fullscreen',
+            'fodeviceselection', 'hangup', 'profile', 'chat', 'recording',
+            'livestreaming', 'etherpad', 'sharedvideo', 'settings', 'raisehand',
+            'videoquality', 'filmstrip', 'invite', 'feedback', 'stats', 'shortcuts',
+            'tileview', 'videobackgroundblur', 'download', 'help', 'mute-everyone',
+            'e2ee'
+          ],
+        }
+      };
+      const api = new JitsiMeetExternalAPI(domain, options);
+    }
+    
+    function updateChatMessages() {
+      const chatMessages = document.getElementById('chatMessages');
+      chatMessages.innerHTML = '';
+      forums[currentForumIndex].messages.forEach(message => {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('message');
+        switch(message.type) {
+          case 'text':
+            messageElement.textContent = message.text;
+            break;
+          case 'emoji':
+            messageElement.textContent = message.emoji;
+            break;
+          case 'sticker':
+            messageElement.innerHTML = `<img src="${message.url}" alt="Sticker" style="max-width: 100px;">`;
+            break;
+          case 'gif':
+            messageElement.innerHTML = `<img src="${message.url}" alt="GIF" style="max-width: 200px;">`;
+            break;
+        }
+        chatMessages.appendChild(messageElement);
+      });
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    function togglePicker(type) {
+      const picker = document.getElementById(`${type}Picker`);
+      if (picker.style.display === 'block') {
+        picker.style.display = 'none';
+      } else {
+        picker.style.display = 'block';
+        loadPickerContent(type);
+      }
+    }
+    
+    function loadPickerContent(type) {
+      const pickerContent = document.getElementById(`${type}PickerContent`);
+      pickerContent.innerHTML = '';
+      
+      let items;
+      switch(type) {
+        case 'emoji':
+          items = ['😀', '😂', '🤔', '👍', '👎', '❤️', '🎉', '🇧🇷', '💡', '💰'];
+          break;
+        case 'sticker':
+          items = [
+            'https://example.com/sticker1.png',
+            'https://example.com/sticker2.png',
+            'https://example.com/sticker3.png',
+            'https://example.com/sticker4.png',
+            'https://example.com/sticker5.png'
+          ];
+          break;
+        case 'gif':
+          items = [
+            'https://example.com/gif1.gif',
+            'https://example.com/gif2.gif',
+            'https://example.com/gif3.gif',
+            'https://example.com/gif4.gif',
+            'https://example.com/gif5.gif'
+          ];
+          break;
+      }
+      
+      items.forEach(item => {
+        const itemElement = document.createElement('div');
+        itemElement.classList.add('picker-item');
+        if (type === 'emoji') {
+          itemElement.textContent = item;
+          itemElement.onclick = () => addToMessage(item, 'emoji');
+        } else {
+          itemElement.innerHTML = `<img src="${item}" alt="${type}" style="width: 50px; height: 50px;">`;
+          itemElement.onclick = () => addToMessage(item, type);
+        }
+        pickerContent.appendChild(itemElement);
+      });
+    }
+    
+    function addToMessage(item, type) {
+      switch(type) {
+        case 'emoji':
+          forums[currentForumIndex].messages.push({ emoji: item, type: 'emoji' });
+          break;
+        case 'sticker':
+        case 'gif':
+          forums[currentForumIndex].messages.push({ url: item, type: type });
+          break;
+      }
+      updateChatMessages();
+      togglePicker(type);
+    }
+    
+    // Criar alguns fóruns de exemplo
+    createForum("Reforma Tributária", "economia", "Discussão sobre a proposta de reforma tributária e seus impactos na economia brasileira.");
+    createForum("Eleições 2024", "politica", "Debate sobre as próximas eleições municipais e seus possíveis candidatos.");
+    createForum("Políticas de Meio Ambiente", "politica", "Análise das atuais políticas ambientais e propostas de melhorias.");
+    
+    updateUserInfo();
+    
+    function switchToLogin() {
+      document.getElementById('loginPage').style.display = 'none';
+      document.getElementById('loginScreen').style.display = 'flex';
+    }
+    
+    function switchToRegistration() {
+      document.getElementById('loginPage').style.display = 'flex';
+      document.getElementById('loginScreen').style.display = 'none';
+    }
+    
+    window.addEventListener('load', function() {
+      showLoginPage();
+    });
+    </script>
+    </body>
+    </html>
